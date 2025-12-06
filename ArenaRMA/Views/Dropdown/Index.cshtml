@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ArenaRMA.Models.Dropdown>
+
+<h2>Dropdown kezelése</h2>
+
+<a href="/Dropdown/Create">Új dropdown létrehozása</a>
+
+<table class="table" border="1" cellpadding="5">
+    <tr>
+        <th>Név</th>
+        <th>Opciók</th>
+        <th>Műveletek</th>
+    </tr>
+
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.DropdownName</td>
+            <td>
+                @foreach (var o in d.Options)
+                {
+                    <div>
+                        @o.OptionValue
+                        <a href="/Dropdown/DeleteOption/@o.OptionID"
+                           onclick="return confirm('Törlöd?')"> ❌ </a>
+                    </div>
+                }
+            </td>
+            <td>
+                <a href="/Dropdown/AddOption/@d.DropdownID">➕ Opció hozzáadása</a>
+            </td>
+        </tr>
+    }
+</table>

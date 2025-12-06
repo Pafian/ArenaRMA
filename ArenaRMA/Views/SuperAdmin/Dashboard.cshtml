@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h1>SuperAdmin Dashboard</h1>
+
+<p>Üdv, @Context.Session.GetString("Username")!</p>
+
+<ul>
+    <li><a href="/UserAdmin/Index">Felhasználók kezelése</a></li>
+    <li><a href="/DropdownAdmin/Index">Legördülő listák kezelése</a></li>
+    <li><a href="/Emails/Index">Email lista</a></li>
+</ul>

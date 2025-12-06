@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ArenaRMA.Models.Email>
+
+<h2>Emailek listája</h2>
+
+<table class="table" border="1" cellpadding="5">
+    <tr>
+        <th>GARANCIA ID</th>
+        <th>ÉRK. DÁTUM</th>
+        <th>ÉRK.</th>
+        <th>VISZAK.</th>
+        <th>VK. DÁTUM</th>
+        <th>HOL VAN?</th>
+        <th>ÁLLAPOT</th>
+        <th>TECHNIKUS</th>
+        <th>ER</th>
+        <th>BV/BE</th>
+        <th>E5</th>
+        <th>VEVŐ TÍPUS</th>
+        <th>SZÁMLA SZÁMA</th>
+        <th>VEVŐ AZONOSÍTÓ</th>
+        <th>VEVŐ NEVE</th>
+        <th>VEVŐ TELEFONSZÁMA</th>
+        <th>VEVŐ E-MAIL CÍME</th>
+        <th>CIKKSZÁM</th>
+        <th>TERMÉK MEGNEVEZÉS</th>
+        <th>IKEN ID</th>
+        <th>SERIAL NUM</th>
+        <th>ADAPTER</th>
+        <th>HIBA LEÍRÁS</th>
+        <th>ELVÉGZETT MUNKA</th>
+        
+    </tr>
+
+    @foreach (var email in Model)
+    {
+        <tr>
+            <td>@email.Id</td>
+            <td>@email.Sender</td>
+            <td>@email.Date</td>
+            <td>@email.StatusID</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@email.Id">Szerkeszt</a> |
+                <a asp-action="Delete" asp-route-id="@email.Id"
+                   onclick="return confirm('Biztos törlöd?')">Töröl</a>
+            </td>
+        </tr>
+    }
+</table>

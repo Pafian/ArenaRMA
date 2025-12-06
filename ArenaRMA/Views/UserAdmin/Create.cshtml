@@ -1,0 +1,25 @@
+﻿<h2>Új felhasználó létrehozása</h2>
+
+<form method="post">
+    <label>Név:</label>
+    <input name="FullName" /><br />
+
+    <label>Felhasználónév:</label>
+    <input name="Username" /><br />
+
+    <label>Email:</label>
+    <input name="Email" /><br />
+
+    <label>Jelszó:</label>
+    <input name="Password" /><br />
+
+    <label>Szerepkör:</label>
+    <select name="RoleID">
+        @foreach (var r in ViewBag.Roles)
+        {
+            <option value="@r.RoleID">@r.RoleName</option>
+        }
+    </select><br />
+
+    <button type="submit">Létrehoz</button>
+</form>

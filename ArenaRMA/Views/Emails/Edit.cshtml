@@ -1,0 +1,30 @@
+@model ArenaRMA.Models.Email
+
+<h2>Email szerkesztése</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label>Feladó</label><br />
+        <input asp-for="Sender" />
+    </div>
+
+    <div>
+        <label>Dátum</label><br />
+        <input asp-for="Date" type="datetime-local" />
+    </div>
+
+    <div>
+        <label>MessageId</label><br />
+        <input asp-for="MessageId" />
+    </div>
+
+    <div>
+        <label>StatusID</label><br />
+        <input asp-for="StatusID" />
+    </div>
+
+    <br />
+    <button type="submit">Mentés</button>
+</form>

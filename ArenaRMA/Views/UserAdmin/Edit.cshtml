@@ -1,0 +1,34 @@
+﻿@using ArenaRMA.Models
+@model User
+
+
+
+<h2>Felhasználó szerkesztése</h2>
+
+<form method="post">
+    <input type="hidden" name="UserID" value="@Model.UserID" />
+
+    <label>Név:</label>
+    <input name="FullName" value="@Model.FullName" /><br />
+
+    <label>Email:</label>
+    <input name="Email" value="@Model.Email" /><br />
+
+    <label>Szerepkör:</label>
+    <select name="RoleID">
+        @foreach (var r in ViewBag.Roles)
+        {
+            <option value="@r.RoleID" @(r.RoleID == Model.RoleID ? "selected" : "")>
+                @r.RoleName
+            </option>
+        }
+    </select><br />
+
+    <label>Jelszó (új):</label>
+    <input name="Password" value="" /><br />
+
+    <label>Aktív?</label>
+    <input type="checkbox" name="IsActive" @(Model.IsActive ? "checked" : "") /><br />
+
+    <button type="submit">Mentés</button>
+</form>
