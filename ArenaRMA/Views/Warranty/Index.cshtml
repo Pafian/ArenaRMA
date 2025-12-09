@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ArenaRMA.Models.Warranty>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Garancia lista";
+}
+
+<h1 class="dashboard-title">Garanciák</h1>
+
+<!-- SZŰRŐK -->
+<div style="margin-bottom:20px;">
+    <form method="get" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+
+        <!-- Keresés -->
+        <input name="search"
+               value="@Context.Request.Query["search"]"
+               placeholder="Keresés név, termék, széria, garancia ID alapján..."
+               style="padding:8px; min-width:260px;" />
+
+        <!-- Állapot szűrő -->
+        <select name="stateFilter" style="padding:8px; min-width:200px;">
+            <option value="ALL">Összes állapot</option>
+            @foreach (var s in (IEnumerable<string>)ViewBag.States)
+            {
+                <option value="@s" @(Context.Request.Query["stateFilter"] == s ? "selected" : "")>@s</option>
+            }
+        </select>
+
+        <button type="submit"
+                style="padding:8px 16px; background:#1d4ed8; color:white; border:none; border-radius:4px;">
+            Szűrés
+        </button>
+
+    </form>
+</div>
+
+
+<!-- TÁBLÁZAT -->
+<table class="table table-bordered table-striped">
+    <thead style="background:#1d4ed8; color:white;">
+        <tr>
+            <th>Garancia ID</th>
+            <th>Érkezés dátuma</th>
+            <th>Ügyfél</th>
+            <th>Termék</th>
+            <th>Széria</th>
+            <th>Állapot</th>
+            <th>Technikus</th>
+            <th>Műveletek</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var w in Model)
+        {
+            <tr>
+                <td>@w.WarrantyCode</td>
+                <td>@(w.ReceiveDate?.ToString("yyyy-MM-dd"))</td>
+                <td>@w.BuyerName</td>
+                <td>@w.ProductName</td>
+                <td>@w.SerialNumber</td>
+                <td>@w.State</td>
+                <td>@w.Technician</td>
+
+                <td>
+                    @if (Context.Session.GetString("Role") == "SuperAdmin")
+                    {
+                        @if (Context.Session.GetString("Role") == "SuperAdmin")
+                        {
+                            <a href="/Warranty/Edit/@w.Id">Szerkeszt</a>
+                            < a href = "/Warranty/Delete/@w.Id"
+                                onclick = "return confirm('Biztos törlöd?')" > Töröl </ a >
+                        }
+                    }
+
+
+
+
+                        else if (Context.Session.GetString("Role") == "Admin")
+                        {
+                            <a href="/Warranty/Edit/@w.Id">Szerkeszt</a>
+                        }
+                        else
+                        {
+                            <span style="color:gray;">Csak olvasható</span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

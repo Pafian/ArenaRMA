@@ -28,7 +28,6 @@ namespace ArenaRMA.Controllers
                                        && u.Password == password
                                        && u.IsActive);
 
-
             if (user == null)
             {
                 ViewBag.Error = "Hibás bejelentkezés!";
@@ -39,13 +38,24 @@ namespace ArenaRMA.Controllers
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetString("Role", user.Role.RoleName);
 
+            // ROLE ALAPÚ REDIRECT
+            switch (user.Role.RoleName)
+            {
+                case "SuperAdmin":
+                    return RedirectToAction("Index", "Dashboard");
 
-            // SUPERADMIN DASHBOARD
-            if (user.Role.RoleName == "SuperAdmin")
-                return RedirectToAction("Dashboard", "SuperAdmin");
+                case "Admin":
+                    return RedirectToAction("Index", "Dashboard");
 
-            // ADMIN / USER / GUEST
-            return RedirectToAction("Index", "Emails");
+                case "User":
+                    return RedirectToAction("Index", "Warranty");
+
+                case "Guest":
+                    return RedirectToAction("Index", "Warranty");
+
+                default:
+                    return RedirectToAction("Login");
+            }
         }
 
         public IActionResult Logout()

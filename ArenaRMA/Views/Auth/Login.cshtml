@@ -1,21 +1,20 @@
-﻿<h2>Bejelentkezés</h2>
-
-@if (ViewBag.Error != null)
-{
-    <p style="color:red">@ViewBag.Error</p>
+﻿@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Bejelentkezés";
 }
 
-<form method="post">
-    <div>
-        <label>Felhasználónév</label><br />
-        <input name="username" />
-    </div>
+<div class="login-box">
+    <h2>Bejelentkezés</h2>
 
-    <div>
-        <label>Jelszó</label><br />
-        <input type="password" name="password" />
-    </div>
+    @if (ViewBag.Error != null)
+    {
+        <div class="error">@ViewBag.Error</div>
+    }
 
-    <br />
-    <button type="submit">Belépés</button>
-</form>
+    <form method="post">
+        <input type="text" name="username" placeholder="Felhasználónév" required />
+        <input type="password" name="password" placeholder="Jelszó" required />
+
+        <button type="submit" class="login-btn">Belépés</button>
+    </form>
+</div>

@@ -1,0 +1,29 @@
+﻿@model List<Customer>
+
+<h2>Címlista</h2>
+
+<form method="get">
+    <input type="text" name="search" class="form-control" placeholder="Keresés...">
+</form>
+
+<table class="table table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>CÍMSZÁM</th>
+            <th>CÉGNÉV</th>
+            <th>TELEFONSZÁM</th>
+            <th>E-MAIL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CustomerCode</td>
+                <td>@c.CompanyName</td>
+                <td>@c.PhoneNumber</td>
+                <td>@c.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

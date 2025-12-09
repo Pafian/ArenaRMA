@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Ügyfél importálás";
+}
+
+<h2>Ügyfél importálás</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Válassz Excel fájlt (.xlsx)</label>
+        <input type="file" name="file" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Importálás</button>
+</form>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["success"]</div>
+}
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["error"]</div>
+}

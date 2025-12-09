@@ -19,5 +19,13 @@ namespace ArenaRMA.Data
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<Warranty> Warranties { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+
+
+
+
     }
 }

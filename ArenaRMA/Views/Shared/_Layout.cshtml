@@ -1,20 +1,170 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="hu">
 <head>
     <meta charset="utf-8" />
-    <title>ArenaRMA</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - ArenaRMA</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6ff;
+        }
+
+        /* BAL OLDALI MENÜ */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #3380C5;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 25px;
+        }
+
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 30px;
+                color: white;
+                letter-spacing: 1px;
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 12px 25px;
+                color: #dbeafe;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .sidebar a:hover {
+                    background: #173eaf;
+                    color: white;
+                }
+
+        /* FŐ TARTALOM */
+        .main {
+            margin-left: 240px;
+            padding: 25px;
+        }
+
+        .dashboard-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #1e3a8a;
+        }
+
+        /* KÁRTYÁK */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 260px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+            .card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1d4ed8;
+        }
+
+        .card-desc {
+            color: #555;
+            font-size: 15px;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 12px 25px;
+            color: #dbeafe;
+            text-decoration: none;
+            font-size: 17px;
+            transition: 0.2s;
+        }
+
+            .menu-item:hover {
+                background: #173eaf;
+                color: white;
+                padding-left: 32px;
+            }
+
+            .menu-item.active {
+                background: #0f2e8a;
+                padding-left: 32px;
+                color: white;
+                font-weight: bold;
+            }
+    </style>
 </head>
 <body>
 
-    <div style="padding:10px; background:#222; color:white;">
-        <a href="/Emails" style="color:white; margin-right:15px;">Emailek</a>
-        <a href="/Auth/Login" style="color:white; margin-right:15px;">Login</a>
-        <a href="/Auth/Logout" style="color:white; margin-right:15px;">Logout</a>
-        <a href="/SuperAdmin/Login" style="color:white;">SuperAdmin</a>
+    <!-- OLDALSÁV -->
+    <!-- OLDALSÁV -->
+    <div class="sidebar">
+
+        <h2>ArenaRMA</h2>
+
+        <!-- SUPERADMIN MENÜ -->
+        @if (Context.Session.GetString("Role") == "SuperAdmin")
+        {
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Dashboard") ? "active" : "")" href="/Dashboard/Index">🏠 Statisztikák</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Warranty") ? "active" : "")" href="/Warranty/Index">📝 Garanciák</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/UserAdmin") ? "active" : "")" href="/UserAdmin/Index">👤 Felhasználók</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/DropdownAdmin") ? "active" : "")" href="/Customer/Index">📋 Címlisták</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Emails") ? "active" : "")" href="/Emails/Index">📨 E-mail beolvasás</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Customer") ? "active" : "")" href="/Customer/Import">📨 Customer beolvasás</a>
+
+        }
+
+        <!-- ADMIN MENÜ -->
+        @if (Context.Session.GetString("Role") == "Admin")
+        {
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Dashboard/Index") ? "active" : "")" href="/Dashboard/Index">🏠 Statisztikák</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Warranty/Index") ? "active" : "")" href="/Warranty/Index">📝 Garanciák</a>
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/UserAdmin/Index") ? "active" : "")" href="/UserAdmin/Index">👤 Felhasználók</a>
+        }
+
+        <!-- USER MENÜ -->
+        @if (Context.Session.GetString("Role") == "User")
+        {
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Warranty/Index") ? "active" : "")" href="/Warranty/Index">📝 Garanciák</a>
+        }
+
+        <!-- GUEST MENÜ -->
+        @if (Context.Session.GetString("Role") == "Guest")
+        {
+            <a class="menu-item @(Context.Request.Path.StartsWithSegments("/Warranty/Index") ? "active" : "")" href="/Warranty/Index">📝 Garanciák</a>
+        }
+
+
+        <hr style="border-color: rgba(255,255,255,0.3); margin: 20px 0;" />
+
+        <a href="/Auth/Logout">⬅️ Kijelentkezés</a>
+
     </div>
 
-    <div style="padding:20px;">
+
+    <!-- TARTALOM -->
+    <div class="main">
         @RenderBody()
     </div>
 

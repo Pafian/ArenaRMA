@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Dashboard";
+}
+
+@if (Context.Session.GetString("Role") == "SuperAdmin")
+{
+    <h1 class="dashboard-title">Statisztikák</h1>
+
+    <div class="card-container">
+
+        <div class="card">
+            <div class="card-title">Összes garanciabeadás</div>
+            <div class="card-desc">Hamarosan statisztikai adatok…</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Heti új ügyek</div>
+            <div class="card-desc">Hamarosan grafikon…</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Nyitott garanciák</div>
+            <div class="card-desc">Hamarosan összegzés…</div>
+        </div>
+
+    </div>
+}
+else
+{
+    <h1 class="dashboard-title">Üdv, @Context.Session.GetString("Username")!</h1>
+    <p>Válaszd ki a bal oldali menüből, mit szeretnél csinálni.</p>
+}

@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<ArenaRMA.Models.User>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "UserAdmin";
+}
 
 <h2>Felhasználók kezelése</h2>
 
-<a href="/UserAdmin/Create">Új felhasználó</a>
+<p><a href="/UserAdmin/Create">Új felhasználó létrehozása</a></p>
 
 <table class="table" border="1" cellpadding="5">
     <tr>
@@ -23,7 +27,7 @@
             <td>@u.Role.RoleName</td>
             <td>@(u.IsActive ? "Igen" : "Nem")</td>
             <td>
-                <a href="/UserAdmin/Edit/@u.UserID">Szerkesztés</a> |
+                <a href="/UserAdmin/Edit/@u.UserID">Szerkeszt</a> |
                 <a href="/UserAdmin/Delete/@u.UserID"
                    onclick="return confirm('Biztos törlöd?')">Törlés</a>
             </td>

@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #3380C5;
+}
+
+.sidebar-offcanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    background-color: #3380C5;
+    color: #e5e7eb;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-in-out;
+    z-index: 1040;
+    padding-top: 1rem;
+}
+
+.sidebar-offcanvas.show {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.sidebar-header span {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.sidebar-nav .nav-link {
+    color: #9ca3af;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: #1f2937;
+    color: #f9fafb;
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid #1f2937;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-user img {
+    border-radius: 999px;
+}
+
+.content-wrapper {
+    padding: 1rem;
+    margin-top: 3.5rem;
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    background-color: #111827;
+    color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    z-index: 1030;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.topbar-title {
+    margin-left: 0.75rem;
+    font-weight: 600;
+}
+
+.btn-sidebar-toggle {
+    border: none;
+    background: transparent;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+.btn-sidebar-toggle:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+@media (min-width: 992px) {
+    .sidebar-offcanvas {
+        transform: translateX(0);
+    }
+    .content-wrapper {
+        margin-left: 260px;
+        margin-top: 0;
+        padding-top: 1.5rem;
+    }
+    .topbar {
+        left: 260px;
+    }
+}
