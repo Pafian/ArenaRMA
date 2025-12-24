@@ -30,7 +30,7 @@ namespace ArenaRMA.Controllers
 
             if (user == null)
             {
-                ViewBag.Error = "Hibás bejelentkezés!";
+                ViewBag.Error = "HIBÁS BEJELENTKEZÉS";
                 return View();
             }
 
